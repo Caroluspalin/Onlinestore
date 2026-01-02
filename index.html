@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMINA // ARCHIVE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="ambient-mesh"></div>
+
+    <nav class="glass-nav">
+        <div class="nav-logo">LUMINA <span class="blink">_</span></div>
+        
+        <div class="nav-links">
+            <a href="#visuals" class="nav-item" id="link-visuals">VISUALS</a>
+            <a href="#atmosphere" class="nav-item" id="link-atmosphere">ATMOSPHERE</a>
+            <a href="#objects" class="nav-item" id="link-objects">OBJECTS</a>
+        </div>
+        
+        <div class="nav-action">
+            <button class="cart-btn" id="cartButton">CART (0)</button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-text">
+                <span class="batch-tag">ARCHIVE ENTRY 004</span>
+                <h1>CURATE <br><span class="hollow-text">YOUR REALITY</span></h1>
+                <p>Limited drops for modern spaces. <br>Upgrade your environment.</p>
+                <button class="primary-btn" onclick="document.getElementById('visuals').scrollIntoView()">ENTER SHOP</button>
+            </div>
+        </section>
+
+        <section id="visuals" class="collection-section">
+            <div class="section-header">
+                <h2>01 // VISUALS</h2>
+                <span class="line"></span>
+            </div>
+            
+            <div class="product-grid">
+                
+                <div class="product-card" onclick="openProduct('custom', 'Custom Design', 'fantasy.avif', 24.90)">
+                    <div class="card-image">
+                        <img src="fantasy.avif" alt="Custom Design">
+                        <div class="overlay">CREATE YOUR OWN</div>
+                    </div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>DESIGN YOUR OWN</h3>
+                            <div class="pricing">
+                                <span class="new-price">From $24.90</span>
+                            </div>
+                        </div>
+                        <button class="add-btn">CUSTOMIZE</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProduct('wlr', 'Whole Lotta Red', 'wlr.jpeg', 19.90)">
+                    <div class="card-image"><img src="wlr.jpeg" alt="Playboi Carti"></div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>PLAYBOI CARTI</h3>
+                            <div class="pricing"><span class="new-price">$19.90</span></div>
+                        </div>
+                        <button class="add-btn">VIEW DROP</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProduct('orange', 'Channel Orange', 'Orange.jpeg', 19.90)">
+                    <div class="card-image"><img src="Orange.jpeg" alt="Frank Ocean"></div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>FRANK OCEAN</h3>
+                            <div class="pricing"><span class="new-price">$19.90</span></div>
+                        </div>
+                        <button class="add-btn">VIEW DROP</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProduct('drake', 'Scorpion', 'scorp.jpeg', 19.90)">
+                    <div class="card-image"><img src="scorp.jpeg" alt="Drake"></div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>DRAKE</h3>
+                            <div class="pricing"><span class="new-price">$19.90</span></div>
+                        </div>
+                        <button class="add-btn">VIEW DROP</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProduct('weeknd', 'Trilogy', 'Trilogy.jpeg', 19.90)">
+                    <div class="card-image"><img src="Trilogy.jpeg" alt="The Weeknd"></div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>THE WEEKND</h3>
+                            <div class="pricing"><span class="new-price">$19.90</span></div>
+                        </div>
+                        <button class="add-btn">VIEW DROP</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProduct('kanye', 'MBDTF', 'kanye.jpeg', 19.90)">
+                    <div class="card-image"><img src="kanye.jpeg" alt="Kanye West"></div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>KANYE WEST</h3>
+                            <div class="pricing"><span class="new-price">$19.90</span></div>
+                        </div>
+                        <button class="add-btn">VIEW DROP</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="atmosphere" class="collection-section">
+            <div class="section-header">
+                <h2>02 // ATMOSPHERE</h2>
+                <span class="line"></span>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card" onclick="openProduct('cloud', 'Thunder Cloud Kit', 'https://via.placeholder.com/500x500/000000/FFFFFF?text=CLOUD+KIT', 48.00)">
+                    <div class="card-image img-cloud">
+                        <div class="badge-sale">-20%</div>
+                    </div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>THUNDER CLOUD KIT</h3>
+                            <div class="pricing">
+                                <span class="old-price">$60.00</span>
+                                <span class="new-price">$48.00</span>
+                            </div>
+                        </div>
+                        <button class="add-btn">ADD TO CART</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="openProduct('neon', 'Smart Neon Rope', 'https://via.placeholder.com/500x500/1a0529/FFFFFF?text=NEON+ROPE', 36.00)">
+                    <div class="card-image img-neon"></div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>SMART NEON ROPE</h3>
+                            <div class="pricing">
+                                <span class="old-price">$45.00</span>
+                                <span class="new-price">$36.00</span>
+                            </div>
+                        </div>
+                        <button class="add-btn">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="objects" class="collection-section">
+            <div class="section-header">
+                <h2>03 // OBJECTS</h2>
+                <span class="line"></span>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card" onclick="openProduct('moon', 'Levitating Moon', 'https://via.placeholder.com/500x500/111111/FFFFFF?text=MOON', 64.00)">
+                    <div class="card-image img-levitate"></div>
+                    <div class="card-details">
+                        <div class="info-top">
+                            <h3>LEVITATING MOON</h3>
+                            <div class="pricing">
+                                <span class="old-price">$80.00</span>
+                                <span class="new-price">$64.00</span>
+                            </div>
+                        </div>
+                        <button class="add-btn">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="productModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeProduct()">&times;</span>
+            
+            <div class="modal-grid">
+                <div class="modal-img-container">
+                    <img id="modalImg" src="" alt="Product Image">
+                </div>
+                
+                <div class="modal-info">
+                    <h2 id="modalTitle">PRODUCT NAME</h2>
+                    <p class="modal-price" id="modalPrice">$0.00</p>
+                    
+                    <div class="size-selector">
+                        <label>SELECT SIZE</label>
+                        <div class="sizes">
+                            <button class="size-btn active" onclick="selectSize(this, 'A4')">A4 (Standard)</button>
+                            <button class="size-btn" onclick="selectSize(this, 'A3')">A3 (Medium)</button>
+                            <button class="size-btn" onclick="selectSize(this, '50x70')">50x70cm (Large) +$10</button>
+                        </div>
+                    </div>
+
+                    <button class="add-btn full-width" id="modalAddToCart">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chatbot-wrapper">
+        <div class="chat-interface" id="chatInterface">
+            <div class="chat-header">
+                <div class="header-info">
+                    <div class="status-dot"></div>
+                    <span>LUMINA AI</span>
+                </div>
+                <button id="closeChat" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-controls" id="chatControls"></div>
+        </div>
+
+        <button class="chat-trigger" id="chatTrigger">
+            <span>NEED HELP?</span>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
