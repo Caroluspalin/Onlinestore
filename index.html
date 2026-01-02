@@ -43,7 +43,7 @@
             
             <div class="product-grid">
                 
-                <div class="product-card" onclick="openProduct('custom', 'Custom Design', 'fantasy.avif', 24.90)">
+                <div class="product-card" onclick="openProduct('custom', 'Design Your Own', 'fantasy.avif', 24.90)">
                     <div class="card-image">
                         <img src="fantasy.avif" alt="Custom Design">
                         <div class="overlay">CREATE YOUR OWN</div>
@@ -124,8 +124,9 @@
             </div>
 
             <div class="product-grid">
-                <div class="product-card" onclick="openProduct('cloud', 'Thunder Cloud Kit', 'https://via.placeholder.com/500x500/000000/FFFFFF?text=CLOUD+KIT', 48.00)">
-                    <div class="card-image img-cloud">
+                <div class="product-card" onclick="openProduct('cloud', 'Thunder Cloud Kit', 'https://via.placeholder.com/600x800/111/fff?text=CLOUD+KIT', 48.00)">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x800/111/fff?text=CLOUD+KIT" alt="Cloud Kit">
                         <div class="badge-sale">-20%</div>
                     </div>
                     <div class="card-details">
@@ -140,8 +141,10 @@
                     </div>
                 </div>
 
-                <div class="product-card" onclick="openProduct('neon', 'Smart Neon Rope', 'https://via.placeholder.com/500x500/1a0529/FFFFFF?text=NEON+ROPE', 36.00)">
-                    <div class="card-image img-neon"></div>
+                <div class="product-card" onclick="openProduct('neon', 'Smart Neon Rope', 'https://via.placeholder.com/600x800/220022/fff?text=NEON+ROPE', 36.00)">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x800/220022/fff?text=NEON+ROPE" alt="Neon Rope">
+                    </div>
                     <div class="card-details">
                         <div class="info-top">
                             <h3>SMART NEON ROPE</h3>
@@ -163,8 +166,10 @@
             </div>
 
             <div class="product-grid">
-                <div class="product-card" onclick="openProduct('moon', 'Levitating Moon', 'https://via.placeholder.com/500x500/111111/FFFFFF?text=MOON', 64.00)">
-                    <div class="card-image img-levitate"></div>
+                <div class="product-card" onclick="openProduct('moon', 'Levitating Moon', 'https://via.placeholder.com/600x800/000/fff?text=MOON+LAMP', 64.00)">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x800/000/fff?text=MOON+LAMP" alt="Levitating Moon">
+                    </div>
                     <div class="card-details">
                         <div class="info-top">
                             <h3>LEVITATING MOON</h3>
@@ -184,26 +189,30 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeProduct()">&times;</span>
             
-            <div class="modal-grid">
-                <div class="modal-img-container">
-                    <img id="modalImg" src="" alt="Product Image">
+            <div class="modal-img-container">
+                <img id="modalImg" src="" alt="Product Image">
+            </div>
+            
+            <div class="modal-info">
+                <h2 id="modalTitle">PRODUCT NAME</h2>
+                <p class="modal-price" id="modalPrice">$0.00</p>
+                
+                <div id="customInputs" class="custom-inputs" style="display: none;">
+                    <label>PERSONALIZE IT</label>
+                    <input type="text" class="custom-field" placeholder="Artist Name (e.g. Travis Scott)">
+                    <input type="text" class="custom-field" placeholder="Album Name (e.g. Utopia)">
                 </div>
                 
-                <div class="modal-info">
-                    <h2 id="modalTitle">PRODUCT NAME</h2>
-                    <p class="modal-price" id="modalPrice">$0.00</p>
-                    
-                    <div class="size-selector">
-                        <label>SELECT SIZE</label>
-                        <div class="sizes">
-                            <button class="size-btn active" onclick="selectSize(this, 'A4')">A4 (Standard)</button>
-                            <button class="size-btn" onclick="selectSize(this, 'A3')">A3 (Medium)</button>
-                            <button class="size-btn" onclick="selectSize(this, '50x70')">50x70cm (Large) +$10</button>
-                        </div>
+                <div class="size-selector">
+                    <label>SELECT SIZE</label>
+                    <div class="sizes">
+                        <button class="size-btn active" onclick="selectSize(this, 'A4')">A4</button>
+                        <button class="size-btn" onclick="selectSize(this, 'A3')">A3</button>
+                        <button class="size-btn" onclick="selectSize(this, '50x70')">50x70cm (+$10)</button>
                     </div>
-
-                    <button class="add-btn full-width" id="modalAddToCart">ADD TO CART</button>
                 </div>
+
+                <button class="add-btn full-width" id="modalAddToCart">ADD TO CART</button>
             </div>
         </div>
     </div>
