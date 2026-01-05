@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PALIN // ARCHIVE</title>
+    <title>LUMINA // ARCHIVE</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
     <div class="ambient-mesh"></div>
 
     <nav class="glass-nav">
-        <div class="nav-logo">Palin <span class="blink">_</span></div>
-        
+        <div class="nav-logo">LUMINA <span class="blink">_</span></div>
         <div class="nav-links">
-            <a href="#visuals" class="nav-item" id="link-visuals">VISUALS</a>
-            <a href="#atmosphere" class="nav-item" id="link-atmosphere">ATMOSPHERE</a>
-            <a href="#objects" class="nav-item" id="link-objects">OBJECTS</a>
+            <a href="#visuals" class="nav-item">VISUALS</a>
+            <a href="#atmosphere" class="nav-item">ATMOSPHERE</a>
+            <a href="#objects" class="nav-item">OBJECTS</a>
         </div>
-        
         <div class="nav-action">
             <button class="cart-btn" id="cartButton">CART (0)</button>
         </div>
@@ -40,77 +39,8 @@
                 <h2>01 // VISUALS</h2>
                 <span class="line"></span>
             </div>
-            
-            <div class="product-grid">
-                <div class="product-card" onclick="openProduct('custom', 'Design Your Own', 'fantasy.avif', 24.90)">
-                    <div class="card-image">
-                        <img src="fantasy.avif" alt="Custom">
-                        <div class="overlay">CREATE YOUR OWN</div>
-                    </div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>DESIGN YOUR OWN</h3>
-                            <div class="pricing"><span class="new-price">From $24.90</span></div>
-                        </div>
-                        <button class="add-btn">CUSTOMIZE</button>
-                    </div>
+            <div class="product-grid" id="grid-visuals">
                 </div>
-
-                <div class="product-card" onclick="openProduct('wlr', 'Whole Lotta Red', 'wlr.jpeg', 19.90)">
-                    <div class="card-image"><img src="wlr.jpeg" alt="Carti"></div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>PLAYBOI CARTI</h3>
-                            <div class="pricing"><span class="new-price">$19.90</span></div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-
-                <div class="product-card" onclick="openProduct('orange', 'Channel Orange', 'Orange.jpeg', 19.90)">
-                    <div class="card-image"><img src="Orange.jpeg" alt="Frank"></div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>FRANK OCEAN</h3>
-                            <div class="pricing"><span class="new-price">$19.90</span></div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-
-                <div class="product-card" onclick="openProduct('drake', 'Scorpion', 'scorp.jpeg', 19.90)">
-                    <div class="card-image"><img src="scorp.jpeg" alt="Drake"></div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>DRAKE</h3>
-                            <div class="pricing"><span class="new-price">$19.90</span></div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-                
-                <div class="product-card" onclick="openProduct('kanye', 'MBDTF', 'kanye.jpeg', 19.90)">
-                    <div class="card-image"><img src="kanye.jpeg" alt="Kanye"></div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>KANYE WEST</h3>
-                            <div class="pricing"><span class="new-price">$19.90</span></div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-
-                <div class="product-card" onclick="openProduct('weeknd', 'Trilogy', 'Trilogy.jpeg', 19.90)">
-                    <div class="card-image"><img src="Trilogy.jpeg" alt="Weeknd"></div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>THE WEEKND</h3>
-                            <div class="pricing"><span class="new-price">$19.90</span></div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <section id="atmosphere" class="collection-section">
@@ -118,41 +48,7 @@
                 <h2>02 // ATMOSPHERE</h2>
                 <span class="line"></span>
             </div>
-
-            <div class="product-grid">
-                <div class="product-card" onclick="openProduct('cloud', 'Thunder Cloud Kit', 'clouded.avif', 48.00)">
-                    <div class="card-image">
-                        <img src="clouded.avif" alt="Cloud Kit">
-                        <div class="badge-sale">-20%</div>
-                    </div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>THUNDER CLOUD KIT</h3>
-                            <div class="pricing">
-                                <span class="old-price">$60.00</span>
-                                <span class="new-price">$48.00</span>
-                            </div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-
-                <div class="product-card" onclick="openProduct('neon', 'Smart Neon Rope', 'ledstrip.avif', 36.00)">
-                    <div class="card-image">
-                        <img src="ledstrip.avif" alt="Neon Rope">
-                    </div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>SMART NEON ROPE</h3>
-                            <div class="pricing">
-                                <span class="old-price">$45.00</span>
-                                <span class="new-price">$36.00</span>
-                            </div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-            </div>
+            <div class="product-grid" id="grid-atmosphere"></div>
         </section>
 
         <section id="objects" class="collection-section">
@@ -160,37 +56,7 @@
                 <h2>03 // OBJECTS</h2>
                 <span class="line"></span>
             </div>
-
-            <div class="product-grid">
-                <div class="product-card" onclick="openProduct('mirror', 'Infinity Mirror', 'Mirror.avif', 75.00)">
-                    <div class="card-image">
-                        <img src="Mirror.avif" alt="Mirror">
-                    </div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>INFINITY MIRROR</h3>
-                            <div class="pricing">
-                                <span class="old-price">$90.00</span>
-                                <span class="new-price">$75.00</span>
-                            </div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-
-                <div class="product-card" onclick="openProduct('rug', 'Vortex Illusion Rug', '3dRug.avif', 39.90)">
-                    <div class="card-image">
-                        <img src="3dRug.avif" alt="Rug">
-                    </div>
-                    <div class="card-details">
-                        <div class="info-top">
-                            <h3>VORTEX ILLUSION RUG</h3>
-                            <div class="pricing"><span class="new-price">$39.90</span></div>
-                        </div>
-                        <button class="add-btn">INSPECT</button>
-                    </div>
-                </div>
-            </div>
+            <div class="product-grid" id="grid-objects"></div>
         </section>
     </main>
 
@@ -230,17 +96,13 @@
                 <h2>YOUR CART</h2>
                 <span class="close-modal" onclick="closeCheckout()">&times;</span>
             </div>
-            
-            <div class="cart-items" id="cartItemsContainer">
-                <p class="empty-msg">Your cart is empty.</p>
-            </div>
-
+            <div class="cart-items" id="cartItemsContainer"></div>
             <div class="checkout-footer">
                 <div class="total-row">
                     <span>TOTAL</span>
                     <span id="cartTotal">$0.00</span>
                 </div>
-                <button class="primary-btn full-width" onclick="alert('Proceeding to payment gateway...')">PAY NOW</button>
+                <button class="primary-btn full-width" onclick="alert('Connecting to payment gateway...')">PAY NOW</button>
             </div>
         </div>
     </div>
@@ -248,9 +110,7 @@
     <div class="chatbot-wrapper">
         <div class="chat-interface" id="chatInterface">
             <div class="chat-header">
-                <div class="header-info">
-                    <div class="status-dot"></div><span>LUMINA AI</span>
-                </div>
+                <div class="header-info"><div class="status-dot"></div><span>LUMINA AI</span></div>
                 <button id="closeChat" class="close-btn">&times;</button>
             </div>
             <div class="chat-messages" id="chatMessages"></div>
