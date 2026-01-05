@@ -1,4 +1,3 @@
-<img width="1440" height="900" alt="Screenshot 2026-01-05 at 21 43 56" src="https://github.com/user-attachments/assets/011661d5-c0bb-4ad1-a28d-37453c6cb187" />
 Online Store Project 🛒
 A modern, responsive e-commerce interface built to learn full-stack development concepts. This project moves beyond static HTML/CSS by integrating a real cloud database for dynamic product management and order tracking.
 
