@@ -35,13 +35,12 @@ Open index.html in your browser (or use Live Server in VS Code).
 
 Note on Database: The project connects to a live Supabase instance. If products don't load, check the console for API key errors or create your own Supabase project and update script.js.
 
-📂 Project Structure
+### 📂 Project Structure
 
-Plaintext
+```text
 /onlinestore
 │
 ├── index.html    # Main structure and layout
 ├── style.css     # Glassmorphism styling and responsive grid
-├── script.js     # logic for fetching data from Supabase & cart management
+├── script.js     # Logic for fetching data from Supabase & cart management
 └── README.md     # Project documentation
-Created by Carolus Palin
