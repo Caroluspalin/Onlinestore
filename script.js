@@ -4,54 +4,49 @@
 
 // --- SUPABASE YHTEYS ---
 const SUPABASE_URL = 'https://nyqacczlqcecswqkhzjc.supabase.co'; 
-// TÄMÄ OLI VÄÄRIN, TÄSSÄ ON NYT SE OIKEA PITKÄ AVAIN:
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55cWFjY3pscWNlY3N3cWtoempjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc1MzUzNjUsImV4cCI6MjA4MzExMTM2NX0.ASO0i2YRWZHkRSSsmzd4us-dOls52FokGe9caxon3Yg';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); 
-// Globaalit muuttujat
-let cart = []; // Ostoskori
-let currentProduct = {}; // Tällä hetkellä auki oleva tuote
-let selectedSize = 'Standard'; // Valittu koko
+// KORJAUS: Nimetään muuttuja 'db':ksi (tai supabaseClient), jotta se ei riitele 'supabase'-kirjaston kanssa
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// DOM Elementit (Navigaatio & UI)
+// Globaalit muuttujat
+let cart = []; 
+let currentProduct = {}; 
+let selectedSize = 'Standard'; 
+
+// DOM Elementit
 const cartButton = document.getElementById('cartButton');
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-item');
-
-// DOM Elementit (Tuote Modal)
 const productModal = document.getElementById('productModal');
 const modalImg = document.getElementById('modalImg');
 const modalTitle = document.getElementById('modalTitle');
 const modalPrice = document.getElementById('modalPrice');
 const modalAddToCart = document.getElementById('modalAddToCart');
 const customInputs = document.getElementById('customInputs');
-
-// DOM Elementit (Checkout / Cart)
 const checkoutModal = document.getElementById('checkoutModal');
 const cartItemsContainer = document.getElementById('cartItemsContainer');
 const cartTotalElement = document.getElementById('cartTotal');
 
 
 /* =========================================
-   2. HAE TUOTTEET TIETOKANNASTA (SUPABASE)
+   2. HAE TUOTTEET TIETOKANNASTA
    ========================================= */
 
 async function fetchProducts() {
     console.log("Haetaan tuotteita...");
 
-    // 1. Hae kaikki rivit 'products' taulusta
-    const { data: products, error } = await supabase
+    // KORJAUS: Käytetään nyt 'db' muuttujaa
+    const { data: products, error } = await db
         .from('Products')
         .select('*')
-        .order('id', { ascending: true }); // Järjestä ID:n mukaan
+        .order('id', { ascending: true });
 
-    // 2. Jos virhe, kerro konsolissa
     if (error) {
         console.error('Virhe haettaessa tuotteita:', error);
         return;
     }
 
-    // 3. Jos onnistui, luo kortit
     if (products) {
         console.log("Tuotteet ladattu:", products);
         products.forEach(product => {
@@ -60,29 +55,21 @@ async function fetchProducts() {
     }
 }
 
-// Tämä funktio rakentaa HTML-kortin yhdelle tuotteelle
 function createProductCard(product) {
-    // Päätellään mihin gridiin tuote kuuluu kategorian perusteella
-    // Esim. jos category on 'visuals', etsitään elementti id="grid-visuals"
     const gridId = `grid-${product.category}`; 
     const container = document.getElementById(gridId);
 
-    // Jos gridiä ei löydy HTML:stä, lopeta
     if (!container) return;
 
-    // Logiikka napeille ja teksteille
     const isCustom = product.text_id === 'custom';
     const btnText = isCustom ? 'CUSTOMIZE' : 'INSPECT';
     const overlayHTML = isCustom ? '<div class="overlay">CREATE YOUR OWN</div>' : '';
     
-    // Luodaan kortti elementti
     const card = document.createElement('div');
     card.classList.add('product-card');
     
-    // Kun korttia klikataan, avataan modal näillä tiedoilla
     card.onclick = () => openProduct(product.text_id, product.title, product.image_url, product.price);
 
-    // Kortin HTML-sisältö
     card.innerHTML = `
         <div class="card-image">
             <img src="${product.image_url}" alt="${product.title}">
@@ -99,16 +86,15 @@ function createProductCard(product) {
         </div>
     `;
 
-    // Lisää kortti sivulle
     container.appendChild(card);
 }
 
-// KÄYNNISTÄ HAKU HETI KUN SIVU LATAUTUU
+// Käynnistetään haku
 fetchProducts();
 
 
 /* =========================================
-   3. SCROLL SPY (NAVIGAATION KOROSTUS)
+   3. SCROLL SPY
    ========================================= */
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -125,30 +111,25 @@ sections.forEach(section => observer.observe(section));
 
 
 /* =========================================
-   4. TUOTE MODAL (POP-UP) LOGIIKKA
+   4. TUOTE MODAL LOGIIKKA
    ========================================= */
 
 function openProduct(id, title, imgUrl, basePrice) {
-    // Tallenna tiedot muistiin
     currentProduct = { id, title, imgUrl, basePrice };
     
-    // Päivitä UI
     modalImg.src = imgUrl;
     modalTitle.innerText = title;
     
-    // Näytä custom-kentät vain jos kyseessä on custom-tuote
     if (id === 'custom') {
         customInputs.style.display = 'block';
     } else {
         customInputs.style.display = 'none';
     }
     
-    // Nollaa koko ja hinta
     selectedSize = 'Standard';
     resetSizeButtons();
     updatePrice();
     
-    // Avaa ikkuna
     productModal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -158,12 +139,10 @@ function closeProduct() {
     document.body.style.overflow = 'auto';
 }
 
-// Sulje jos klikkaa taustalle
 productModal.addEventListener('click', (e) => {
     if (e.target === productModal) closeProduct();
 });
 
-// Koon valinta
 function selectSize(btn, size) {
     document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -173,32 +152,22 @@ function selectSize(btn, size) {
 
 function resetSizeButtons() {
     document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-    // Etsi eka nappi ja aktivoi se (olettaen että se on Standard/A4)
     const firstBtn = document.querySelector('.size-btn');
     if(firstBtn) firstBtn.classList.add('active');
 }
 
-// Hinnan päivitys koon mukaan
 function updatePrice() {
     let finalPrice = currentProduct.basePrice;
-    
-    if (selectedSize === 'Large' || selectedSize === 'A3') {
-        finalPrice += 10;
-    } else if (selectedSize === 'XL' || selectedSize === '50x70') {
-        finalPrice += 20;
-    }
-    
+    if (selectedSize === 'Large' || selectedSize === 'A3') finalPrice += 10;
+    if (selectedSize === 'XL' || selectedSize === '50x70') finalPrice += 20;
     modalPrice.innerText = '$' + finalPrice.toFixed(2);
 }
 
-// LISÄÄ OSTOSKORIIN -NAPPI
 modalAddToCart.addEventListener('click', () => {
-    // 1. Laske lopullinen hinta
     let finalPrice = currentProduct.basePrice;
     if (selectedSize === 'Large' || selectedSize === 'A3') finalPrice += 10;
     if (selectedSize === 'XL' || selectedSize === '50x70') finalPrice += 20;
 
-    // 2. Lisää tuote kori-taulukkoon
     cart.push({
         title: currentProduct.title,
         price: finalPrice,
@@ -206,10 +175,8 @@ modalAddToCart.addEventListener('click', () => {
         img: currentProduct.imgUrl
     });
 
-    // 3. Päivitä yläpalkin laskuri
     cartButton.innerText = `CART (${cart.length})`;
 
-    // 4. Animaatio nappiin
     const originalText = modalAddToCart.innerText;
     modalAddToCart.innerText = "ADDED TO CART";
     modalAddToCart.style.background = "#fff";
@@ -225,12 +192,11 @@ modalAddToCart.addEventListener('click', () => {
 
 
 /* =========================================
-   5. OSTOSKORI / CHECKOUT LOGIIKKA
+   5. OSTOSKORI / CHECKOUT
    ========================================= */
 
-// Avaa ostoskori
 cartButton.addEventListener('click', () => {
-    renderCart(); // Päivitä sisältö
+    renderCart();
     checkoutModal.classList.add('active');
 });
 
@@ -242,7 +208,6 @@ checkoutModal.addEventListener('click', (e) => {
     if (e.target === checkoutModal) closeCheckout();
 });
 
-// Piirrä ostoskorin sisältö
 function renderCart() {
     cartItemsContainer.innerHTML = '';
     let total = 0;
@@ -255,18 +220,16 @@ function renderCart() {
 
     cart.forEach((item) => {
         total += item.price;
-        
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('cart-item');
-        itemDiv.innerHTML = `
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
             <div class="item-info">
                 <h4>${item.title}</h4>
                 <span>Option: ${item.size}</span>
             </div>
             <div class="item-price">$${item.price.toFixed(2)}</div>
         `;
-        
-        cartItemsContainer.appendChild(itemDiv);
+        cartItemsContainer.appendChild(div);
     });
 
     cartTotalElement.innerText = '$' + total.toFixed(2);
@@ -274,7 +237,7 @@ function renderCart() {
 
 
 /* =========================================
-   6. CHATBOT LOGIIKKA
+   6. CHATBOT
    ========================================= */
 
 const chatTrigger = document.getElementById('chatTrigger');
@@ -351,7 +314,6 @@ function renderStep(step) {
 function handleOpt(opt) {
     addMsg(opt.label, 'user');
     chatControls.innerHTML = '';
-    
     setTimeout(() => {
         if (opt.action) {
             const sectionId = opt.action.replace('goto_', '');
