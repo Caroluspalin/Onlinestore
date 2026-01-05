@@ -2,13 +2,12 @@
    1. ASETUKSET JA MUUTTUJAT
    ========================================= */
 
-// --- SUPABASE YHTEYS (VAIHDA NÄMÄ OMIIN!) ---
+// --- SUPABASE YHTEYS ---
 const SUPABASE_URL = 'https://nyqacczlqcecswqkhzjc.supabase.co'; 
-const SUPABASE_KEY = 'sb_publishable_bIoO5szTFS90RhARTwK-IA_t1uYzBta';
+// TÄMÄ OLI VÄÄRIN, TÄSSÄ ON NYT SE OIKEA PITKÄ AVAIN:
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55cWFjY3pscWNlY3N3cWtoempjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc1MzUzNjUsImV4cCI6MjA4MzExMTM2NX0.ASO0i2YRWZHkRSSsmzd4us-dOls52FokGe9caxon3Yg';
 
-// Käynnistetään Supabase
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); 
 // Globaalit muuttujat
 let cart = []; // Ostoskori
 let currentProduct = {}; // Tällä hetkellä auki oleva tuote
@@ -42,7 +41,7 @@ async function fetchProducts() {
 
     // 1. Hae kaikki rivit 'products' taulusta
     const { data: products, error } = await supabase
-        .from('products')
+        .from('Products')
         .select('*')
         .order('id', { ascending: true }); // Järjestä ID:n mukaan
 
