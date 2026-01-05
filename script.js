@@ -192,9 +192,10 @@ modalAddToCart.addEventListener('click', () => {
 
 
 /* =========================================
-   5. OSTOSKORI / CHECKOUT
+   5. OSTOSKORI / CHECKOUT & TILAUS
    ========================================= */
 
+// Avaa ostoskori
 cartButton.addEventListener('click', () => {
     renderCart();
     checkoutModal.classList.add('active');
@@ -208,6 +209,7 @@ checkoutModal.addEventListener('click', (e) => {
     if (e.target === checkoutModal) closeCheckout();
 });
 
+// Piirrä ostoskori
 function renderCart() {
     cartItemsContainer.innerHTML = '';
     let total = 0;
@@ -233,6 +235,57 @@ function renderCart() {
     });
 
     cartTotalElement.innerText = '$' + total.toFixed(2);
+}
+
+// --- TILAUKEN LÄHETYS (UUSI OSIA) ---
+const payButton = document.getElementById('payButton'); // Muista päivittää ID HTML:ään!
+const emailInput = document.getElementById('emailInput');
+
+if (payButton) {
+    payButton.addEventListener('click', async () => {
+        // 1. Tarkista onko kori tyhjä
+        if (cart.length === 0) {
+            alert("Cart is empty!");
+            return;
+        }
+
+        // 2. Tarkista sähköposti
+        const email = emailInput.value;
+        if (!email || !email.includes('@')) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        // 3. Laske loppusumma
+        let total = 0;
+        cart.forEach(item => total += item.price);
+
+        payButton.innerText = "PROCESSING...";
+
+        // 4. LÄHETÄ SUPABASEEN
+        const { error } = await db
+            .from('orders') // Varmista että taulun nimi on 'orders' (pienellä)
+            .insert({
+                customer_email: email,
+                total_price: total,
+                items: cart
+            });
+
+        if (error) {
+            console.error("Order failed:", error);
+            alert("Order failed. See console.");
+            payButton.innerText = "PAY NOW";
+        } else {
+            // 5. ONNISTUI!
+            alert("Order placed successfully! 🚀");
+            cart = []; // Tyhjennä kori
+            emailInput.value = "";
+            renderCart();
+            closeCheckout();
+            cartButton.innerText = "CART (0)";
+            payButton.innerText = "PAY NOW";
+        }
+    });
 }
 
 
